@@ -56,21 +56,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        loginButton.setOnClickListener {
-            if (emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()) {
-
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(
-                    emailEditText.text.toString(),
-                    passwordEditText.text.toString()
-                ).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        showHome(it.result?.user?.email ?:"", ProviderType.BASIC)
-                    } else {
-                        showAlert()
-                    }
-                }
-            }
+        already_have_textView.setOnClickListener {
+        val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
     }
     private fun showAlert() {
