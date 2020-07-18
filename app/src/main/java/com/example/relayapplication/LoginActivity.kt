@@ -37,8 +37,7 @@ private fun setup() {
         }
     }
     main_have_textView.setOnClickListener {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        onBackPressed()
     }
 }
 
