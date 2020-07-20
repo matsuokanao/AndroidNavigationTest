@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 private fun setup() {
-    title = "Authentication" //認証
+    title = "Login" //titlebar
     loginButton.setOnClickListener {
         if (emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()) {
 

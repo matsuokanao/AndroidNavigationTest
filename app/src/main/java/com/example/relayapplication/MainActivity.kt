@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setup() {
-        title = "Authentication" //認証
+        title = "Wellcome!!" //titlebar
         SingUpButton.setOnClickListener {
             if (emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()) {
 

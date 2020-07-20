@@ -16,4 +16,6 @@
     <string name="title_home">Home</string>
     <string name="title_application">application</string>
     <string name="title_manager">manager</string>
+
+    <string name="attention_application">試合登録時に送信されたリレーパスワードを入力して下さい</string>
 </resources>

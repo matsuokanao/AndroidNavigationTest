@@ -5,10 +5,15 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.relayapplication.application.ApplicationFragment
+import com.example.relayapplication.home.HomeFragment
+import com.example.relayapplication.manager.ManagerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
@@ -24,20 +29,35 @@ class HomeActivity :AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_home, R.id.navigation_application, R.id.navigation_manager))
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        // Load first fragment by default
+        loadFragment(HomeFragment())
 
-        //logoutButton.setOnClickListener {
-        //    FirebaseAuth.getInstance().signOut()
-       //     onBackPressed()
-       // }
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            when{
+                menuItem.itemId == R.id.navigationHome -> {
+                    loadFragment(HomeFragment())
+                    return@setOnNavigationItemSelectedListener true
+                }
+                menuItem.itemId == R.id.navigationApplication -> {
+                    loadFragment(ApplicationFragment())
+                    return@setOnNavigationItemSelectedListener true
+                }
+                menuItem.itemId == R.id.navigationManager -> {
+                    loadFragment(ManagerFragment())
+                    return@setOnNavigationItemSelectedListener true
+                }
+                else -> {
+                    return@setOnNavigationItemSelectedListener false
+                 }
+             }
+        }
+    }
+    private fun loadFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction().also{fragmentTransaction ->
+            fragmentTransaction.replace(R.id.fragmentContainer, fragment)
+            fragmentTransaction.commit()
+        }
     }
 }
 
